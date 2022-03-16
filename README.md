@@ -11,8 +11,8 @@ Consiste numa [API](https://palenske-cookmaster.herokuapp.com/) que armazena e f
 Nela é possível fazer o cadastro e login de pessoas usuárias, sendo apenas essas pessoas que poderão acessar, modificar e deletar as receitas que cadastrou.
 As funcionalidades desse projeto são:
   - [Cadastro de usuário](#1---cadastrar-usuário)
-  - [Login](#2---crie-um-endpoint-para-o-login-de-usuários)
-  - [Cadastro de receitas](#3---crie-um-endpoint-para-o-cadastro-de-receitas)
+  - [Login](#2---login-de-usuários)
+  - [Cadastro de receitas](#3---cadastrar-receita)
   - [listar receitas](#4---crie-um-endpoint-para-a-listagem-de-receitas)
   - [listar receita por ID](#5---crie-um-endpoint-para-visualizar-uma-receita-específica)
   - [editar receita]()
@@ -87,19 +87,27 @@ As funcionalidades desse projeto são:
 **Validações:**
 
 - **[Será validado que o campo "name" é obrigatório]**
+
 - **[Será validado que o campo "email" é obrigatório]**
+
 - **[Será validado que não é possível cadastrar usuário com o campo email inválido]**
+
 - **[Será validado que o campo "senha" é obrigatório]**
+
 - **[Será validado que o campo "email" é único]**
+
 - **[Será validado que o usuário foi cadastrado com sucesso]**
+
 - **[Será validado que, ao cadastrar usuário, o valor do campo "role" tenha o valor "user"]**
 Se o usuário for cadastrado com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `201`:
 
 ![Usuário Cadastrado](./public/create_user_success.png)
 
-### 2 - Crie um endpoint para o login de usuários
+### 2 - Login de usuários
 
 - Utilize a seguinte rota: `https://palenske-cookmaster.herokuapp.com/login`
+
+- O verbo HTTP deverá ser `POST`
 
 - A rota deve receber os campos Email e Senha e esses campos devem ser validados no banco de dados.
 
@@ -119,22 +127,26 @@ Se o usuário for cadastrado com sucesso o resultado retornado deverá ser confo
 **Validações:**
 
 - **[Será validado que o campo "email" é obrigatório]**
+
 - **[Será validado que o campo "password" é obrigatório]**
+
 - **[Será validado que não é possível fazer login com um email inválido]**
+
 - **[Será validado que não é possível fazer login com uma senha inválida]**
+
 - **[Será validado que é possível fazer login com sucesso]**
 Se foi feito login com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `200`:
 > copie o `token` para realizar os próximo passos.
 ![Login com Sucesso](./public/login_user_success_get_token.png)
 
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMxZDNhMjkyNGY5NjAwMTZhMTRmNTIiLCJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjQ3NDMzMDQ2LCJleHAiOjE2NDc0MzMxMDZ9.WsnzqJWWd7zt1xk-3aWCLdvjjgPauGykDOZjfOhKvlU
-
-### 3 - Crie um endpoint para o cadastro de receitas
+### 3 - Cadastrar receita
 
 - Utilize a seguinte rota: `https://palenske-cookmaster.herokuapp.com/recipes`
 
 - A receita só pode ser criada caso o usuário esteja logado e o token `JWT` validado.
 ![Headers>Authorization>Token](./public/set_token_authorization.png)
+
+- O verbo HTTP deverá ser `POST`
 
 - No banco, a receita terá os campos Nome, Ingredientes, Modo de preparo, URL da imagem e Id do Autor.
 
@@ -157,33 +169,33 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMxZDNhMjkyNGY5NjAwMTZhMTRmNTI
 **Validações:**
 
 - **[Será validado que não é possível cadastrar receita sem o campo "name"]**
+
 - **[Será validado que não é possível cadastrar receita sem o campo "ingredients"]**
+
 - **[Será validado que não é possível cadastrar receita sem o campo "preparation"]**
+
 - **[Será validado que não é possível cadastrar uma receita com token invalido]**
+
 - **[Será validado que é possível cadastrar uma receita com sucesso]**
 O resultado retornado para cadastrar a receita com sucesso deverá ser conforme exibido abaixo, com um status http `201`:
 
 ![Receita com Sucesso](./public/create_recipe_success.png)
 
-### 4 - Crie um endpoint para a listagem de receitas
+### 4 - Listar receitas
 
-- A rota deve ser (`/recipes`).
+- A rota deve ser (`https://palenske-cookmaster.herokuapp.com/recipes`).
+
+- O verbo HTTP deverá ser `GET`
 
 - A rota pode ser acessada por usuários logados ou não
 
-**Além disso, as seguintes verificações serão feitas:**
+**Validações:**
 
 - **[Será validado que é possível listar todas as receitas sem estar autenticado]**
 
-O resultado retornado para listar receitas com sucesso deverá ser conforme exibido abaixo, com um status http `200`:
-
-![Receita com Sucesso](./public/listarreceitas.png)
-
 - **[Será validado que é possível listar todas as receitas estando autenticado]**
 
-O resultado retornado para listar receitas com sucesso deverá ser conforme exibido abaixo, com um status http `200`:
-
-![Receita com Sucesso](./public/listarreceitas.png)
+![Receita com Sucesso](./public/list_recipes.png)
 
 ### 5 - Crie um endpoint para visualizar uma receita específica
 
