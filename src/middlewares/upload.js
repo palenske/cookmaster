@@ -9,7 +9,7 @@ const storage = multer.diskStorage({
   filename: (req, _file, callback) => {
     const { id } = req.params;
 
-    req.filePath = `${API_URL}/src/uploads/${id}.jpeg`;
+    req.filePath = `${API_URL}/images/${id}.jpeg`;
 
     callback(null, `${id}.jpeg`);
   },

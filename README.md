@@ -13,12 +13,13 @@ As funcionalidades desse projeto são:
   - [Cadastro de usuário](#1---cadastrar-usuário)
   - [Login](#2---login-de-usuários)
   - [Cadastro de receitas](#3---cadastrar-receita)
-  - [listar receitas](#4---listar-receitas)
-  - [listar receita por ID](#5---visualizar-uma-receita-específica)
-  - [login como administrador](#6---conta-de-administrador)
-  - [editar receita](#7---editar-uma-receita)
-  - [excluir receita](#8---excluir-uma-receita)
-  - [adicionar imagem a uma receita](#9---adicionar-uma-imagem-a-uma-receita)
+  - [Listar receitas](#4---listar-receitas)
+  - [Listar receita por ID](#5---visualizar-uma-receita-específica)
+  - [Login como administrador](#6---conta-de-administrador)
+  - [Editar receita](#7---editar-uma-receita)
+  - [Excluir receita](#8---excluir-uma-receita)
+  - [Adicionar imagem a uma receita](#9---adicionar-uma-imagem-a-uma-receita)
+  - [Acessar imagem de uma receita](#10---acessar-a-imagem-de-uma-receita)
 
 ## Tecnologias usadas
 - Node.js
@@ -302,7 +303,7 @@ O resultado retornado para excluir uma receita com sucesso deverá ser conforme 
 
 - A URL completa para acessar a imagem através da API será gravada no banco de dados, junto com os dados da receita.
 
-**Além disso, as seguintes verificações serão feitas:**
+**Validações:**
 
 - **[Será validado que é possível enviar foto com usuário autenticado]**
 
@@ -315,16 +316,16 @@ O resultado retornado para adicionar uma foto na receita com sucesso deverá ser
 
 ![Foto Autenticada](./public/upload_image.png)
 
-<!-- ### 10 - Crie um endpoint para acessar a imagem de uma receita
+### 10 - Acessar a imagem de uma receita
 
-- As imagens devem estar disponíveis através da rota `/images/<id-da-receita>.jpeg` na API.
+- As imagens estarão disponíveis através da rota `/images/<id-da-receita>.jpeg` na API.
 
-**Além disso, as seguintes verificações serão feitas:**
+**Validações:**
 
 - **[Será validado que é retornada uma imagem como resposta]**
-
 O resultado retornado deverá ser do tipo imagem, com um status http `200`:
+> Você pode ver a imagem acessando o link gerado na função anterior, direto do navegador
 
-![Foto Autenticada](./public/imagemrecetornada.png) -->
+![Foto Autenticada](./public/view_image.png)
 
 
