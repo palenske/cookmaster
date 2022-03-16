@@ -2,7 +2,7 @@
   Cookmaster Project :cook:
 </h1>
 <h4 align="center"> 
-  :fried_egg: Armazene e consulte suas melhores receitas! :notebook_with_decorative_cover:
+  :notebook_with_decorative_cover: Armazene e consulte suas melhores receitas! :fried_egg:
 </h4>
 
 ## Sobre o projeto
