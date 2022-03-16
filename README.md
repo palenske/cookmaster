@@ -314,7 +314,7 @@ O resultado retornado para excluir uma receita com sucesso deverá ser conforme 
 - **[Será validado que é possível enviar foto com usuário admin]**
 O resultado retornado para adicionar uma foto na receita com sucesso deverá ser conforme exibido abaixo, com um status http `200`:
 
-![Foto Autenticada](./public/upload_image.png)
+![Foto Autenticada](./public/upload_image_url.png)
 
 ### 10 - Acessar a imagem de uma receita
 
