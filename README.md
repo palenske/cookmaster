@@ -7,10 +7,10 @@
 
 ## Sobre o projeto
 
-Consiste numa API que armazena e fornece receitas :yum:
+Consiste numa [API](https://palenske-cookmaster.herokuapp.com/) que armazena e fornece receitas :yum:
 Nela é possível fazer o cadastro e login de pessoas usuárias, sendo apenas essas pessoas que poderão acessar, modificar e deletar as receitas que cadastrou.
 As funcionalidades desse projeto são:
-  - [Cadastro de usuário](#1---crie-um-endpoint-para-o-cadastro-de-usuc3a1rios-1)
+  - [Cadastro de usuário](#1---cadastrar-usuário)
   - [Login](#2---crie-um-endpoint-para-o-login-de-usuários)
   - [Cadastro de receitas](#3---crie-um-endpoint-para-o-cadastro-de-receitas)
   - [listar receitas](#4---crie-um-endpoint-para-a-listagem-de-receitas)
@@ -28,7 +28,8 @@ As funcionalidades desse projeto são:
 - Arquitetura REST e MSC
 - Mocha/Chai
 - Sinon
-- MongoDB
+- MongoDB (cloud)
+- Heroku
 
 ## Habilidades desenvolvidas
 
@@ -40,32 +41,38 @@ As funcionalidades desse projeto são:
 - Realizar testes de integração
 
 
-## Como rodar a aplicação
+## Como rodar a aplicação localmente e executar testes de integração
 > Certifique-se de que tenha o Git e o NPM instalados em sua máquina. Caso não os tenha rode os seguintes comandos:
 > `sudo apt install git-all` && `sudo apt install npm`
 - Faça um clone do repositório em sua máquina:
-  `git clone https://github.com/palenske/trybe-wallet.git`
+  `git clone https://github.com/palenske/cookmaster.git`
 - Entre no diretório do projeto:
-  `cd trybe-wallet`
+  `cd cookmaster`
 - Instale as dependências:
   `npm install`
 - Inicie a aplicação:
   `npm start`
+- Para rodar os testes, com a aplicação rodando, rode o seguinte comando:
+ `npm run dev:test`
 
 ## Como utilizar os end-points da API:
-> para consumir a API, utilizarei o [postman](https://web.postman.co/home)
+> A aplicação está rodando num servidor [heroku](https://palenske-cookmaster.herokuapp.com/), configurada para salvar os dados num cluster MongoDB em nuvem.
+> O heroku mantém as aplicações free em estado de dormencia, acesse o [link](https://palenske-cookmaster.herokuapp.com/) para ligar-las.
+> para consumir a API, exemplificarei com o [postman](https://web.postman.co/home)
 
 ### 1 - Cadastrar usuário
 
-- A rota deve ser (`/users`).
+- Utilize a seguinte rota: `https://palenske-cookmaster.herokuapp.com/users`
 
-- No banco um usuário precisa ter os campos Email, Senha, Nome e Role.
+- O verbo HTTP deverá ser `POST`
+
+- No banco, um usuário terá os campos Email, Senha, Nome e Role.
 
 - Para criar um usuário através da API, todos os campos são obrigatórios, com exceção do Role.
 
 - O campo Email deve ser único.
 
-- Usuários criados através desse endpoint devem ter seu campo Role com o atributo _user_, ou seja, devem ser usuários comuns, e não admins.
+- Usuários criados através desse endpoint terão o campo Role com o atributo _user_, ou seja, usuários comuns, e não admins.
 
 - O body da requisição deve conter o seguinte formato:
 
@@ -76,61 +83,29 @@ As funcionalidades desse projeto são:
     "password": "string"
   }
   ```
-- Não use `bcrypt` ou outra biblioteca para encriptar a senha, para que o avaliador funcione corretamente.
 
-**Além disso, as seguintes verificações serão feitas:**
+**Validações:**
 
 - **[Será validado que o campo "name" é obrigatório]**
-
-Se o usuário não tiver o campo "name" o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
-
-![Usuário sem Nome](./public/usuariosemnome.png)
-
 - **[Será validado que o campo "email" é obrigatório]**
-
-Se o usuário não tiver o campo "email" o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
-
-![Usuário sem Email](./public/usuariosememail.png)
-
 - **[Será validado que não é possível cadastrar usuário com o campo email inválido]**
-
-Se o usuário tiver o campo email inválido o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
-
-![Email Inválido](./public/campoemailinvalido.png)
-
 - **[Será validado que o campo "senha" é obrigatório]**
-
-Se o usuário não tiver o campo "senha" o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
-
-![Usuário sem Senha](./public/usuariosemsenha.png)
-
 - **[Será validado que o campo "email" é único]**
-
-Se o usuário cadastrar o campo "email" com um email que já existe, o resultado retornado deverá ser conforme exibido abaixo, com um status http `409`:
-
-![Email já Usado](./public/emailjausado.png)
-
-- **[Será validado que é possível cadastrar usuário com sucesso]**
-
+- **[Será validado que o usuário foi cadastrado com sucesso]**
+- **[Será validado que, ao cadastrar usuário, o valor do campo "role" tenha o valor "user"]**
 Se o usuário for cadastrado com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `201`:
 
-![Usuário Cadastrado](./public/usuariocriadocomsucesso.png)
-
-- **[Será validado que é possível ao cadastrar usuário, o valor do campo "role" tenha o valor "user"]**
-
-Se o usuário for criado com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `201`:
-
-![Campo Role](./public/validarrole.png)
+![Usuário Cadastrado](./public/create_user_success.png)
 
 ### 2 - Crie um endpoint para o login de usuários
 
-- A rota deve ser (`/login`).
+- Utilize a seguinte rota: `https://palenske-cookmaster.herokuapp.com/login`
 
 - A rota deve receber os campos Email e Senha e esses campos devem ser validados no banco de dados.
 
-- Na configuração do `JWT` **não use variáveis de ambientes** para não ter conflito com o avaliador.
+- Na configuração do `JWT` **não está sendo utilizado variáveis de ambientes**.
 
-- Um token `JWT` deve ser gerado e retornado caso haja sucesso no login. No seu payload deve estar presente o id, email e role do usuário.
+- Um token `JWT` será gerado e retornado caso haja sucesso no login. 
 
 - O body da requisição deve conter o seguinte formato:
 
@@ -141,45 +116,27 @@ Se o usuário for criado com sucesso o resultado retornado deverá ser conforme 
   }
   ```
 
-**Além disso, as seguintes verificações serão feitas:**
+**Validações:**
 
 - **[Será validado que o campo "email" é obrigatório]**
-
-Se o login não tiver o campo "email" o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
-
-![Usuário sem Senha](./public/loginsememail.png)
-
 - **[Será validado que o campo "password" é obrigatório]**
-
-Se o login não tiver o campo "password" o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
-
-![Usuário sem Senha](./public/loginsemsenha.png)
-
 - **[Será validado que não é possível fazer login com um email inválido]**
-
-Se o login tiver o email inválido o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
-
-![Email Inválido](./public/loginemailinvalido.png)
-
 - **[Será validado que não é possível fazer login com uma senha inválida]**
-
-Se o login tiver a senha inválida o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
-
-![Senha Inválida](./public/loginsenhainvalida.png)
-
 - **[Será validado que é possível fazer login com sucesso]**
-
 Se foi feito login com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `200`:
+> copie o `token` para realizar os próximo passos.
+![Login com Sucesso](./public/login_user_success_get_token.png)
 
-![Login com Sucesso](./public/logincomsucesso.png)
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMxZDNhMjkyNGY5NjAwMTZhMTRmNTIiLCJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjQ3NDMzMDQ2LCJleHAiOjE2NDc0MzMxMDZ9.WsnzqJWWd7zt1xk-3aWCLdvjjgPauGykDOZjfOhKvlU
 
 ### 3 - Crie um endpoint para o cadastro de receitas
 
-- A rota deve ser (`/recipes`).
+- Utilize a seguinte rota: `https://palenske-cookmaster.herokuapp.com/recipes`
 
 - A receita só pode ser criada caso o usuário esteja logado e o token `JWT` validado.
+![Headers>Authorization>Token](./public/set_token_authorization.png)
 
-- No banco, a receita deve ter os campos Nome, Ingredientes, Modo de preparo, URL da imagem e Id do Autor.
+- No banco, a receita terá os campos Nome, Ingredientes, Modo de preparo, URL da imagem e Id do Autor.
 
 - Nome, ingredientes e modo de preparo devem ser recebidos no corpo da requisição, com o seguinte formato:
 
@@ -193,41 +150,20 @@ Se foi feito login com sucesso o resultado retornado deverá ser conforme exibid
 
 - O campo dos ingredientes pode ser um campo de texto aberto.
 
-- O campo ID do autor, deve ser preenchido automaticamente com o ID do usuário logado, que deve ser extraído do token JWT.
+- O campo ID do autor, será extraído do token JWT.
 
 - A URL da imagem será preenchida através de outro endpoint
 
-**Além disso, as seguintes verificações serão feitas:**
+**Validações:**
 
 - **[Será validado que não é possível cadastrar receita sem o campo "name"]**
-
-Se a receita não tiver o campo "name" o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
-
-![Receita sem nome](./public/receitasemnome.png)
-
 - **[Será validado que não é possível cadastrar receita sem o campo "ingredients"]**
-
-Se a receita não tiver o campo "ingredients" o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
-
-![Receita sem ingrediente](./public/receitasemingrediente.png)
-
 - **[Será validado que não é possível cadastrar receita sem o campo "preparation"]**
-
-Se a receita não tiver o campo "preparation" o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
-
-![Receita sem preparo](./public/receitasempreparo.png)
-
 - **[Será validado que não é possível cadastrar uma receita com token invalido]**
-
-Se a receita não tiver o token válido o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
-
-![Receita com token inválido](./public/tokeninvalidoreq3.png)
-
 - **[Será validado que é possível cadastrar uma receita com sucesso]**
-
 O resultado retornado para cadastrar a receita com sucesso deverá ser conforme exibido abaixo, com um status http `201`:
 
-![Receita com Sucesso](./public/receitacomsucesso.png)
+![Receita com Sucesso](./public/create_recipe_success.png)
 
 ### 4 - Crie um endpoint para a listagem de receitas
 
