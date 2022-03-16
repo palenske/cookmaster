@@ -70,9 +70,9 @@ describe('PUT /recipes/:id/image', () => {
       expect(response.body).to.have.property('image');
     });
 
-    it(`"image" possui o valor "localhost:3000/src/uploads/${RECIPE_ID}.jpeg"`, () => {
+    it(`"image" possui o valor "https://palenske-cookmaster.herokuapp.com/images/${RECIPE_ID}.jpeg"`, () => {
       expect(response.body.image).to.be
-        .equals(`localhost:3000/src/uploads/${RECIPE_ID}.jpeg`);
+        .equals(`https://palenske-cookmaster.herokuapp.com/images/${RECIPE_ID}.jpeg`);
     });
   });
 
