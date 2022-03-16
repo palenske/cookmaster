@@ -13,10 +13,11 @@ As funcionalidades desse projeto são:
   - [Cadastro de usuário](#1---cadastrar-usuário)
   - [Login](#2---login-de-usuários)
   - [Cadastro de receitas](#3---cadastrar-receita)
-  - [listar receitas](#4---crie-um-endpoint-para-a-listagem-de-receitas)
-  - [listar receita por ID](#5---crie-um-endpoint-para-visualizar-uma-receita-específica)
-  - [editar receita]()
-  - [excluir receita]()
+  - [listar receitas](#4---listar-receitas)
+  - [listar receita por ID](#5---visualizar-uma-receita-específica)
+  - [login com administrador](#6---conta-de-administrador)
+  - [editar receita](#7---editar-uma-receita)
+  - [excluir receita](#8---excluir-uma-receita)
   - [adicionar imagem a uma receita]()
 
 ## Tecnologias usadas
@@ -183,7 +184,7 @@ O resultado retornado para cadastrar a receita com sucesso deverá ser conforme 
 
 ### 4 - Listar receitas
 
-- A rota deve ser (`https://palenske-cookmaster.herokuapp.com/recipes`).
+- Utilize a seguinte rota: `https://palenske-cookmaster.herokuapp.com/recipes`.
 
 - O verbo HTTP deverá ser `GET`
 
@@ -197,49 +198,38 @@ O resultado retornado para cadastrar a receita com sucesso deverá ser conforme 
 
 ![Receita com Sucesso](./public/list_recipes.png)
 
-### 5 - Crie um endpoint para visualizar uma receita específica
+### 5 - Visualizar uma receita específica
 
-- A rota deve ser (`/recipes/:id`).
+- Utilize a seguinte rota: `https://palenske-cookmaster.herokuapp.com/recipes/:id`.
 
 - A rota pode ser acessada por usuários logados ou não
 
-**Além disso, as seguintes verificações serão feitas:**
+**Validações:**
+
+- **[Será validado que não é possível listar uma receita que não existe]**
 
 - **[Será validado que é possível listar uma receita específica sem estar autenticado]**
-
-O resultado retornado para listar uma receita com sucesso deverá ser conforme exibido abaixo, com um status http `200`:
-
-![Listar uma Receita](./public/listarumareceita.png)
 
 - **[Será validado que é possível listar uma receita específica estando autenticado]**
 
 O resultado retornado para listar uma receita com sucesso deverá ser conforme exibido abaixo, com um status http `200`:
 
-![Listar uma Receita](./public/listarumareceita.png)
+![Listar uma Receita](./public/list_recipes_by_id.png)
 
-- **[Será validado que não é possível listar uma receita que não existe]**
 
-O resultado retornado para listar uma receita que não existe deverá ser conforme exibido abaixo, com um status http `404`:
+### 6 - Conta de administrador
 
-![Listar uma Receita inexistente](./public/receitanaoencontrada.png)
+- No banco há uma conta com o role `admin`
+> email: root@email.com / password: admin
 
-### 6 - Crie uma query em mongo que insira uma pessoa usuária com permissões de admin
+- Com ela é possível executar os passos a seguir com privilégios de administrador
 
-Crie um arquivo `seed.js` na raiz do projeto com uma query do Mongo DB capaz de inserir um usuário na coleção _users_ com os seguintes valores:
 
-`{ name: 'admin', email: 'root@email.com', password: 'admin', role: 'admin' }`
+### 7 - Editar uma receita
 
-**Obs.:** Esse usuário tem o poder de criar, deletar, atualizar ou remover qualquer receita, independente de quem a cadastrou. Isso será solicitado ao longo dos próximos requisitos.
+- Utilize a seguinte rota: `https://palenske-cookmaster.herokuapp.com/recipes/:id`
 
-**Além disso, as seguintes verificações serão feitas:**
-
-- **[Será validado que o projeto tem um arquivo de seed, com um comando para inserir um usuário root e verifico que é possível fazer login]**    
-
-Será validado no arquivo `seed.js` existe a query para criar um usuário root
-
-### 7 - Crie um endpoint para a edição de uma receita
-
-- A rota deve ser (`/recipes/:id`).
+- O verbo HTTP deverá ser `PUT`
 
 - A receita só pode ser atualizada caso o usuário esteja logado e o token `JWT` validado.
 
@@ -255,63 +245,42 @@ Será validado no arquivo `seed.js` existe a query para criar um usuário root
   }
   ```
 
-**Além disso, as seguintes verificações serão feitas:**
+**Validações:**
 
 - **[Será validado que não é possível editar receita sem estar autenticado]**
 
-O resultado retornado para editar receita sem autenticação deverá ser conforme exibido abaixo, com um status http `401`:
-
-![Editar uma Receita sem autenticação](./public/editarsemautenticacao.png)
-
 - **[Será validado que não é possível editar receita com token inválido]**
-
-O resultado retornado para editar receita com token inválido deverá ser conforme exibido abaixo, com um status http `401`:
-
-![Editar uma Receita com token inválido](./public/editartokeninvalido.png)
 
 - **[Será validado que é possível editar receita estando autenticado]**
 
-O resultado retornado para editar uma receita com sucesso deverá ser conforme exibido abaixo, com um status http `200`:
-
-![Editar uma Receita](./public/editarcomsucesso.png)
-
 - **[Será validado que é possível editar receita com usuário admin]**
-
 O resultado retornado para editar uma receita com sucesso deverá ser conforme exibido abaixo, com um status http `200`:
 
-![Editar uma Receita](./public/editarcomsucesso.png)
+![Editar uma Receita](./public/edit_recipe_with_admin.png)
 
-### 8 - Crie um endpoint para a exclusão de uma receita
+### 8 - Excluir uma receita
 
-- A rota deve ser (`/recipes/:id`).
+- Utilize a seguinte rota: `https://palenske-cookmaster.herokuapp.com/recipes/:id`
 
 - A receita só pode ser excluída caso o usuário esteja logado e o token `JWT` validado.
 
 - A receita só pode ser excluída caso pertença ao usuário logado, ou caso o usuário logado seja um admin.
 
-**Além disso, as seguintes verificações serão feitas:**
+**Validações:**
 
 - **[Será validado que não é possível excluir receita sem estar autenticado]**
 
-O resultado retornado para excluir uma receita sem autenticação deverá ser conforme exibido abaixo, com um status http `401`:
-
-![Excluir uma Receita sem autenticação](./public/excluirsemautenticacao.png)
-
 - **[Será validado que é possível excluir receita estando autenticado]**
-
-O resultado retornado para excluir uma receita com sucesso deverá ser conforme exibido abaixo, com um status http `204`:
-
-![Excluir uma Receita](./public/excluircomsucesso.png)
 
 - **[Será validado que é possível excluir receita com usuário admin]**
 
 O resultado retornado para excluir uma receita com sucesso deverá ser conforme exibido abaixo, com um status http `204`:
 
-![Excluir uma Receita](./public/excluircomsucesso.png)
+![Excluir uma Receita](./public/delete_recipe_with_admin.png)
 
-### 9 - Crie um endpoint para a adição de uma imagem a uma receita
+### 9 - Adicionar uma imagem a uma receita
 
-- A rota deve ser (`/recipes/:id/image/`).
+- Utilize a seguinte rota: (`/recipes/:id/image/`).
 
 - A imagem deve ser lida do campo `image`.
 
@@ -353,7 +322,7 @@ O resultado retornado para adicionar uma foto na receita com sucesso deverá ser
 
 ![Foto Autenticada](./public/fotocomsucesso.png)
 
-### 10 - Crie um endpoint para acessar a imagem de uma receita
+<!-- ### 10 - Crie um endpoint para acessar a imagem de uma receita
 
 - As imagens devem estar disponíveis através da rota `/images/<id-da-receita>.jpeg` na API.
 
@@ -363,132 +332,6 @@ O resultado retornado para adicionar uma foto na receita com sucesso deverá ser
 
 O resultado retornado deverá ser do tipo imagem, com um status http `200`:
 
-![Foto Autenticada](./public/imagemrecetornada.png)
+![Foto Autenticada](./public/imagemrecetornada.png) -->
 
-### 11 - Crie testes de integração que cubram no mínimo 30% dos arquivos em `src`, com um mínimo de 50 linhas cobertas
 
-- Os testes de integração devem ser criados na pasta `./src/integration-tests`, essa pasta **não pode ser renomeada ou removida**;
-
-- O arquivo `change.me.test.js` pode ser alterado, renomeado ou removido;
-
-- Os testes devem ser criados usando o instrumental e boas práticas apresentado nos conteúdos de testes do course;
-
-- Para rodar os testes, utilize o comando `npm run dev:test`;
-
-- Para visualizar a cobertura, utilize o comando `npm run dev:test:coverage`;
-
-**Além disso, as seguintes verificações serão feitas:**
-
-- **[Será validado que o teste cobre o valor esperado]**
-
-Nenhum teste pode ser pulado;
-O resultado do percentual total de cobertura deve ser igual ou maior que `30`;
-O resultado do numero total de linhas cobertas deve ser igual ou maior que `50`.
-
-## Requisitos Bônus
-
-### 12 - Crie um endpoint para cadastro de pessoas administradoras
-
-- A rota deve ser (`/users/admin`).
-
-- Só será possível adicionar um admin caso esta ação esteja sendo feita por outro admin, portanto, deve ser validado se há um admin logado.
-
-- Por padrão, as requisições pra esse endpoint devem adicionar um usuário com a role _admin_.
-
-- O corpo da requisição deve ter o seguinte formato:
-
-  ```json
-  {
-    "name": "string",
-    "email": "string",
-    "password": "string"
-  }
-  ```
-
-**Além disso, as seguintes verificações serão feitas:**
-
-- **[Será validado que não é possível cadastrar um usuário admin, sem estar autenticado como um usuário admin]**
-
-Se o usuário admin não é criado com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `403`:
-
-![Criar usuário sem ser admin](./public/soadmincria.png)
-
-- **[Será validado que é possível cadastrar um usuário admin]**
-
-Se o usuário admin é criado com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `201`:
-
-![Criar admin](./public/criaradmin.png)
-
-### 13 - Crie testes de integração que cubram no mínimo 60% dos arquivos em `src`, com um mínimo de 100 linhas cobertas
-
-- Os testes de integração devem ser criados na pasta `./src/integration-tests`, essa pasta **não pode ser renomeada ou removida**;
-
-- O arquivo `change.me.test.js` pode ser alterado, renomeado ou removido;
-
-- Os testes devem ser criados usando o instrumental e boas práticas apresentado nos conteúdos de testes do course;
-
-- Para rodar os testes, utilize o comando `npm run dev:test`;
-
-- Para visualizar a cobertura, utilize o comando `npm run dev:test:coverage`;
-
-**Além disso, as seguintes verificações serão feitas:**
-
-- **[Será validado que o teste cobre o valor esperado]**
-
-Nenhum teste pode ser pulado;
-O resultado do percentual total de cobertura deve ser igual ou maior que `60`;
-O resultado do numero total de linhas cobertas deve ser igual ou maior que `100`.
-
-### 14 - Crie testes de integração que cubram no mínimo 90% dos arquivos em `src`, com um mínimo de 150 linhas cobertas
-
-- Os testes de integração devem ser criados na pasta `./src/integration-tests`, essa pasta **não pode ser renomeada ou removida**;
-
-- O arquivo `change.me.test.js` pode ser alterado, renomeado ou removido;
-
-- Os testes devem ser criados usando o instrumental e boas práticas apresentado nos conteúdos de testes do course;
-
-- Para rodar os testes, utilize o comando `npm run dev:test`;
-
-- Para visualizar a cobertura, utilize o comando `npm run dev:test:coverage`;
-
-**Além disso, as seguintes verificações serão feitas:**
-
-- **[Será validado que o teste cobre o valor esperado]**
-
-Nenhum teste pode ser pulado;
-O resultado do percentual total de cobertura deve ser igual ou maior que `90`;
-O resultado do numero total de linhas cobertas deve ser igual ou maior que `150`.
-
----
-
-## Depois de terminar o desenvolvimento (opcional)
-
-Para sinalizar que o seu projeto está pronto para o _"Code Review"_ dos seus colegas, faça o seguinte:
-
-* Vá até a página **DO SEU** _Pull Request_, adicione a label de _"code-review"_ e marque seus colegas:
-
-  * No menu à direita, clique no _link_ **"Labels"** e escolha a _label_ **code-review**;
-
-  * No menu à direita, clique no _link_ **"Assignees"** e escolha **o seu usuário**;
-
-  * No menu à direita, clique no _link_ **"Reviewers"** e digite `students`, selecione o time `tryber/students-sd-00`.
-
-Caso tenha alguma dúvida, [aqui tem um video explicativo](https://vimeo.com/362189205).
-
----
-
-# Revisando um pull request
-
-Use o conteúdo sobre [Code Review](https://course.betrybe.com/real-life-engineer/code-review/) para te ajudar a revisar os _Pull Requests_.
-
-#VQV
-
----
-
-# Avisos finais
-
-Ao finalizar e submeter o projeto, não se esqueça de avaliar sua experiência preenchendo o formulário. Leva menos de 3 minutos!
-
-Link: [FORMULÁRIO DE AVALIAÇÃO DE PROJETO](https://be-trybe.typeform.com/to/ZTeR4IbH#cohort_name=Turma%2011)
-
-O avaliador automático não necessariamente avalia seu projeto na ordem em que os requisitos aparecem no readme. Isso acontece para deixar o processo de avaliação mais rápido. Então, não se assuste se isso acontecer, ok?
