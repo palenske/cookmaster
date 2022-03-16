@@ -18,7 +18,7 @@ As funcionalidades desse projeto são:
   - [login como administrador](#6---conta-de-administrador)
   - [editar receita](#7---editar-uma-receita)
   - [excluir receita](#8---excluir-uma-receita)
-  - [adicionar imagem a uma receita]()
+  - [adicionar imagem a uma receita](#9---adicionar-uma-imagem-a-uma-receita)
 
 ## Tecnologias usadas
 - Node.js
