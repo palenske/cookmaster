@@ -314,7 +314,7 @@ O resultado retornado para excluir uma receita com sucesso deverá ser conforme 
 - **[Será validado que é possível enviar foto com usuário admin]**
 O resultado retornado para adicionar uma foto na receita com sucesso deverá ser conforme exibido abaixo, com um status http `200`:
 
-![Foto Autenticada](./public/upload_image_url.png)
+![Foto upload](./public/upload_image_url.png)
 
 ### 10 - Acessar a imagem de uma receita
 
@@ -327,6 +327,6 @@ O resultado retornado deverá ser do tipo imagem, com um status http `200`:
 > Você pode ver a imagem acessando o link gerado na função anterior, direto do navegador
 > exemplo: https://palenske-cookmaster.herokuapp.com/images/6231ef3d3b39b70016237c77.jpeg
 
-![Foto Autenticada](./public/view_image.png)
+![Foto visualizar imagem](./public/view_image.png)
 
 
