@@ -325,6 +325,7 @@ O resultado retornado para adicionar uma foto na receita com sucesso deverá ser
 - **[Será validado que é retornada uma imagem como resposta]**
 O resultado retornado deverá ser do tipo imagem, com um status http `200`:
 > Você pode ver a imagem acessando o link gerado na função anterior, direto do navegador
+> exemplo: https://palenske-cookmaster.herokuapp.com/images/6231ef3d3b39b70016237c77.jpeg
 
 ![Foto Autenticada](./public/view_image.png)
 
