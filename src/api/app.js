@@ -9,7 +9,7 @@ const error = require('../err/errors');
 const app = express();
 app.use(bodyParser.json());
 
-app.get('/', (_request, response) => response.send());
+// app.get('/', (_request, response) => response.send());
 
 app.use('/users', usersRoutes);
 app.use('/login', loginRoutes);
