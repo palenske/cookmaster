@@ -15,7 +15,7 @@ As funcionalidades desse projeto são:
   - [Cadastro de receitas](#3---cadastrar-receita)
   - [listar receitas](#4---listar-receitas)
   - [listar receita por ID](#5---visualizar-uma-receita-específica)
-  - [login com administrador](#6---conta-de-administrador)
+  - [login como administrador](#6---conta-de-administrador)
   - [editar receita](#7---editar-uma-receita)
   - [excluir receita](#8---excluir-uma-receita)
   - [adicionar imagem a uma receita]()
@@ -262,6 +262,8 @@ O resultado retornado para editar uma receita com sucesso deverá ser conforme e
 
 - Utilize a seguinte rota: `https://palenske-cookmaster.herokuapp.com/recipes/:id`
 
+- O verbo HTTP deverá ser `DELETE`
+
 - A receita só pode ser excluída caso o usuário esteja logado e o token `JWT` validado.
 
 - A receita só pode ser excluída caso pertença ao usuário logado, ou caso o usuário logado seja um admin.
@@ -281,6 +283,8 @@ O resultado retornado para excluir uma receita com sucesso deverá ser conforme 
 ### 9 - Adicionar uma imagem a uma receita
 
 - Utilize a seguinte rota: (`/recipes/:id/image/`).
+
+- O verbo HTTP deverá ser `PUT`
 
 - A imagem deve ser lida do campo `image`.
 
