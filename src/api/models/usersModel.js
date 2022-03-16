@@ -1,6 +1,7 @@
 const MongoConnection = require('../../connections/mongoConnection');
 
 const create = async (newUser) => {
+  console.log('model user', newUser);
   try {
     const users = await MongoConnection.connection()
       .then((db) => db.collection('users'));
