@@ -57,12 +57,10 @@ As funcionalidades desse projeto são:
  `npm run dev:test`
 
 ## Como utilizar os end-points da API:
-* A aplicação está rodando num servidor [heroku](https://palenske-cookmaster.herokuapp.com/), configurada para salvar os dados num cluster MongoDB em nuvem.
+* A aplicação está rodando num servidor **[heroku](https://palenske-cookmaster.herokuapp.com/)**, configurada para salvar os dados num cluster MongoDB em nuvem.
+> O heroku mantém as aplicações free em estado de dormencia, acesse o [link](https://palenske-cookmaster.herokuapp.com/) para ligar.
 
-* O heroku mantém as aplicações free em estado de dormencia, acesse o [link](https://palenske-cookmaster.herokuapp.com/) para ligar-las.
-
-* para consumir a API, exemplificarei com o [postman](https://web.postman.co/home)
-
+* Para consumir a API, exemplificarei com o **[postman](https://web.postman.co/home)**
 > Caso tenha alguma dúvida de como configurar as requisições do postman, observe atentamente as imagens no final de cada função deste readme.
 
 ### 1 - Cadastrar usuário
