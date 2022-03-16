@@ -1,5 +1,7 @@
 const multer = require('multer');
 
+const API_URL = 'https://palenske-cookmaster.herokuapp.com';
+
 const storage = multer.diskStorage({
   destination: (_req, _file, callback) => {
     callback(null, `${__dirname}/../uploads`);
@@ -7,7 +9,7 @@ const storage = multer.diskStorage({
   filename: (req, _file, callback) => {
     const { id } = req.params;
 
-    req.filePath = `localhost:3000/src/uploads/${id}.jpeg`;
+    req.filePath = `${API_URL}/src/uploads/${id}.jpeg`;
 
     callback(null, `${id}.jpeg`);
   },
