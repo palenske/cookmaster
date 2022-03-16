@@ -57,9 +57,13 @@ As funcionalidades desse projeto são:
  `npm run dev:test`
 
 ## Como utilizar os end-points da API:
-> A aplicação está rodando num servidor [heroku](https://palenske-cookmaster.herokuapp.com/), configurada para salvar os dados num cluster MongoDB em nuvem.
-> O heroku mantém as aplicações free em estado de dormencia, acesse o [link](https://palenske-cookmaster.herokuapp.com/) para ligar-las.
-> para consumir a API, exemplificarei com o [postman](https://web.postman.co/home)
+* A aplicação está rodando num servidor [heroku](https://palenske-cookmaster.herokuapp.com/), configurada para salvar os dados num cluster MongoDB em nuvem.
+
+* O heroku mantém as aplicações free em estado de dormencia, acesse o [link](https://palenske-cookmaster.herokuapp.com/) para ligar-las.
+
+* para consumir a API, exemplificarei com o [postman](https://web.postman.co/home)
+
+> Caso tenha alguma dúvida de como configurar as requisições do postman, observe atentamente as imagens no final de cada função deste readme.
 
 ### 1 - Cadastrar usuário
 
@@ -282,49 +286,36 @@ O resultado retornado para excluir uma receita com sucesso deverá ser conforme 
 
 ### 9 - Adicionar uma imagem a uma receita
 
-- Utilize a seguinte rota: (`/recipes/:id/image/`).
+- Utilize a seguinte rota: `https://palenske-cookmaster.herokuapp.com/recipes/:id/image/`.
 
 - O verbo HTTP deverá ser `PUT`
 
-- A imagem deve ser lida do campo `image`.
+- A imagem será lida do campo `image`.
 
-- O endpoint deve aceitar requisições no formato `multipart/form-data`.
+- O endpoint aceitará requisições no formato `multipart/form-data`.
 
 - A receita só pode ser atualizada caso o usuário esteja logado e o token `JWT` validado.
 
 - A receita só pode ser atualizada caso pertença ao usuário logado ou caso o usuário logado seja admin.
 
-- O upload da imagem deverá ser feito utilizando o `Multer`.
+- O upload da imagem será feito utilizando o `Multer`.
 
-- O nome do arquivo deve ser o ID da receita, e sua extensão `.jpeg`.
+- O nome do arquivo será o ID da receita, e sua extensão `.jpeg`.
 
-- A URL completa para acessar a imagem através da API deve ser gravada no banco de dados, junto com os dados da receita.
+- A URL completa para acessar a imagem através da API será gravada no banco de dados, junto com os dados da receita.
 
 **Além disso, as seguintes verificações serão feitas:**
 
 - **[Será validado que é possível enviar foto com usuário autenticado]**
 
-O resultado retornado para adicionar uma foto na receita com sucesso deverá ser conforme exibido abaixo, com um status http `200`:
-
-![Foto Autenticada](./public/fotocomsucesso.png)
-
 - **[Será validado que ao enviar foto, o nome da imagem é alterada para o id da receita]**
-
-O resultado retornado para adicionar uma foto na receita com sucesso deverá ser conforme exibido abaixo, com um status http `200`:
-
-![Foto Autenticada](./public/fotocomsucesso.png)
 
 - **[Será validado que não é possível enviar foto sem estar autenticado]**
 
-O resultado retornado para adicionar uma foto na receita com sucesso deverá ser conforme exibido abaixo, com um status http `401`:
-
-![Excluir uma Receita](./public/fotonaoautenticada.png)
-
 - **[Será validado que é possível enviar foto com usuário admin]**
-
 O resultado retornado para adicionar uma foto na receita com sucesso deverá ser conforme exibido abaixo, com um status http `200`:
 
-![Foto Autenticada](./public/fotocomsucesso.png)
+![Foto Autenticada](./public/upload_image.png)
 
 <!-- ### 10 - Crie um endpoint para acessar a imagem de uma receita
 
